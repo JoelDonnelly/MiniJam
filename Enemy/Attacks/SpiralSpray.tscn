@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsh548e674y6o"]
+
+[ext_resource type="Script" path="res://Enemy/Attacks/WaveSpray.gd" id="1_fqswl"]
+[ext_resource type="PackedScene" uid="uid://fpcsenpftkra" path="res://Enemy/Bullet.tscn" id="2_grtm5"]
+
+[node name="WaveSpray" type="Node2D" node_paths=PackedStringArray("target", "bullet_parent")]
+position = Vector2(112, 74)
+script = ExtResource("1_fqswl")
+target = NodePath("Marker2D")
+bullet_scene = ExtResource("2_grtm5")
+bullet_parent = NodePath(".")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(321, 143)

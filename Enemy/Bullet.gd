@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @export var bullet_speed : float = 150
-@export var bullet_damage : float = 1
 
 func _physics_process(delta):
 	velocity = Vector2(bullet_speed*delta,0).rotated(rotation)

@@ -1,0 +1,159 @@
+[gd_scene load_steps=23 format=3 uid="uid://bm62kb7bxw418"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_kqst3"]
+[ext_resource type="PackedScene" uid="uid://uqo2odtv4gi" path="res://Player/slash_attack.tscn" id="2_2igxq"]
+[ext_resource type="Texture2D" uid="uid://22f4wnrba1m" path="res://Resources/PlayerMotion/dude_back.png" id="3_2ln4u"]
+[ext_resource type="Script" path="res://health/health.gd" id="3_wvlhs"]
+[ext_resource type="Script" path="res://health/HitBox.gd" id="4_0ua7n"]
+[ext_resource type="Texture2D" uid="uid://cl5pnw5jfq787" path="res://Resources/PlayerMotion/dude_front.png" id="4_pps32"]
+[ext_resource type="Texture2D" uid="uid://cv5yxdglyetsk" path="res://Resources/PlayerMotion/left1.png" id="5_0tray"]
+[ext_resource type="PackedScene" uid="uid://dwpr58bwswx3x" path="res://health/health_bar.tscn" id="5_i6a26"]
+[ext_resource type="Texture2D" uid="uid://bjxch3ud5por4" path="res://Resources/PlayerMotion/left2.png" id="6_nsew2"]
+[ext_resource type="Texture2D" uid="uid://cr68x7800le3t" path="res://Resources/PlayerMotion/left3.png" id="7_f275n"]
+[ext_resource type="Texture2D" uid="uid://ccpy74p8vy7pr" path="res://Resources/PlayerMotion/down1.png" id="8_cpdbg"]
+[ext_resource type="Texture2D" uid="uid://cgbqywla0tlgo" path="res://Resources/PlayerMotion/down2.png" id="9_g3ukj"]
+[ext_resource type="Texture2D" uid="uid://j1q6dvpxtde2" path="res://Resources/PlayerMotion/down3.png" id="10_snpgm"]
+[ext_resource type="Texture2D" uid="uid://dvqw35lne5ov6" path="res://Resources/PlayerMotion/right1.png" id="11_6djer"]
+[ext_resource type="Texture2D" uid="uid://d4dy5pm4kklc7" path="res://Resources/PlayerMotion/right2.png" id="12_mehs3"]
+[ext_resource type="Texture2D" uid="uid://ct53dq1ccg8x" path="res://Resources/PlayerMotion/right3.png" id="13_3qa6i"]
+[ext_resource type="Texture2D" uid="uid://vngd2rfcg3ey" path="res://Resources/PlayerMotion/up1.png" id="14_crx2m"]
+[ext_resource type="Texture2D" uid="uid://f808alio0f3g" path="res://Resources/PlayerMotion/up2.png" id="15_memqv"]
+[ext_resource type="Texture2D" uid="uid://c6l0t3datfhoy" path="res://Resources/PlayerMotion/up3.png" id="16_yikob"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x3eff"]
+radius = 232.0
+height = 568.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qcj3g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2ln4u")
+}],
+"loop": true,
+"name": &"IdleBack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_pps32")
+}],
+"loop": true,
+"name": &"IdleFront",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0tray")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nsew2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0tray")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f275n")
+}],
+"loop": true,
+"name": &"walkDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_cpdbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_g3ukj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_cpdbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_snpgm")
+}],
+"loop": true,
+"name": &"walkLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_6djer")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_mehs3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6djer")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_3qa6i")
+}],
+"loop": true,
+"name": &"walkRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_crx2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_memqv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_crx2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yikob")
+}],
+"loop": true,
+"name": &"walkUp",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xa6ha"]
+radius = 232.0
+height = 568.0
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
+collision_mask = 66
+script = ExtResource("1_kqst3")
+slash_attack = ExtResource("2_2igxq")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_x3eff")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qcj3g")
+animation = &"IdleBack"
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="DashDurationTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_wvlhs")
+
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("hp")]
+collision_layer = 9
+collision_mask = 16
+script = ExtResource("4_0ua7n")
+hp = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CapsuleShape2D_xa6ha")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_i6a26")]
+position = Vector2(-172, -364)
+scale = Vector2(3.38204, 2.05102)
+health_component = NodePath("../HealthComponent")
+visible_when_full = true
+
+[connection signal="timeout" from="DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]
+[connection signal="out_of_health" from="HealthComponent" to="." method="_on_health_component_out_of_health"]
