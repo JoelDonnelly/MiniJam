@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnj12afexcuaj"]
+
+[ext_resource type="PackedScene" uid="uid://5g8hfpx0l2bt" path="res://TileMap/tile_background.tscn" id="1_yijec"]
+[ext_resource type="PackedScene" uid="uid://cjf1ferjhjfac" path="res://TileMap/red_tile_map.tscn" id="2_08dmk"]
+[ext_resource type="PackedScene" uid="uid://bm62kb7bxw418" path="res://Player/player.tscn" id="3_e6ap0"]
+
+[node name="RedLevel" type="Node2D"]
+
+[node name="TileBackground" parent="." instance=ExtResource("1_yijec")]
+
+[node name="RedTileMap" parent="." instance=ExtResource("2_08dmk")]
+
+[node name="Player" parent="." instance=ExtResource("3_e6ap0")]
+position = Vector2(162, 76)
+scale = Vector2(0.15, 0.15)
+speed = 200
+dash_modifier = 7.0
