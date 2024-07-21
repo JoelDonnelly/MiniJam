@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal startChase
+
 @export var patrolPath : Node2D
 
 @export var target : Node2D
@@ -23,6 +25,7 @@ func on_chase_initiated(char : Node2D) -> void: # connect these to signal
 	target = char
 	is_chasing = true
 	is_patroling = false
+	startChase.emit()
 	
 func on_chase_canceled() -> void: # connect these to signal 
 	target = null
@@ -35,7 +38,7 @@ func _physics_process(delta):
 	if is_chasing && target:
 		direction = position.direction_to(target.position).normalized()
 		speed = chaseSpeed
-	elif is_patroling && patrolPath	:
+	elif is_patroling && patrolPath:
 		direction = position.direction_to(patrolPath.position).normalized()
 		speed = patrolSpeed
 	
