@@ -1,14 +1,9 @@
 extends CharacterBody2D
 
-<<<<<<< HEAD
 @export var speed: int = 250
 @export var dash_modifier: float = 15
-=======
-signal playerdied
 
-var speed: int = 250
-var dash_modifier: float = 15
->>>>>>> hitboxes
+signal playerdied
 
 @export var dash_duration: float:
 	get:
@@ -22,15 +17,14 @@ var dash_modifier: float = 15
 	set(value):
 		$DashCooldownTimer.wait_time = value
 
-<<<<<<< HEAD
+
 var is_dashing: bool:
 	get:
 		return not $DashDurationTimer.is_stopped()
-=======
+
 @export var slash_attack : PackedScene
 
 var attack_flip = false
->>>>>>> hitboxes
 
 var can_dash: bool:
 	get:
@@ -54,9 +48,8 @@ func get_input(delta : float):
 	if Input.is_action_just_pressed("ability_dash") and can_dash:
 		$DashDurationTimer.start()
 		$DashCooldownTimer.start()
-<<<<<<< HEAD
-=======
-	
+
+
 	if Input.is_action_just_pressed("ability_attack"):
 		var slash_node : AttackBox = slash_attack.instantiate()
 		var dir = global_position.direction_to(get_global_mouse_position())
@@ -73,7 +66,6 @@ func get_input(delta : float):
 	
 	velocity = velocity.normalized() * speed
 	if not $DashDurationTimer.is_stopped():
->>>>>>> hitboxes
 		velocity *= dash_modifier
 
 
