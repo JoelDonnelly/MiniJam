@@ -5,10 +5,10 @@ extends CharacterBody2D
 @export var target : Node2D
 	
 var is_chasing = false
-var chaseSpeed : float = 200
+@export var chaseSpeed : float = 200
 
 var is_patroling = true
-var patrolSpeed : float = 100
+@export var patrolSpeed : float = 100
 
 @export var vision_angle : float = PI/6
 
@@ -18,7 +18,6 @@ var patrolSpeed : float = 100
 		
 func _ready():
 	resetVisionShape()
-	
 	
 func on_chase_initiated(char : Node2D) -> void: # connect these to signal
 	target = char
@@ -34,22 +33,19 @@ func _physics_process(delta):
 	var speed : float = 0
 	var direction : Vector2 = Vector2.ZERO 
 	if is_chasing && target:
-		direction = position.direction_to(target.position)
+		direction = position.direction_to(target.position).normalized()
 		speed = chaseSpeed
 	elif is_patroling && patrolPath	:
-		direction = position.direction_to(patrolPath.position)
+		direction = position.direction_to(patrolPath.position).normalized()
 		speed = patrolSpeed
+	
+	$VisionCone.rotation = direction.angle()
 		
-	velocity = direction * speed * delta
+	velocity = direction * speed
 	move_and_slide()
 	
 func resetVisionShape() -> void:
-	var p1 : Vector2 = Vector2.ZERO
-	var p2 : Vector2 = Vector2(vision_dist*cos(vision_angle/2),vision_dist*sin(vision_angle/2))
-	var p3 : Vector2 = Vector2(vision_dist*cos(vision_angle/2),-vision_dist*sin(vision_angle/2))
-	var visionCone : PackedVector2Array = PackedVector2Array([p1,p2,p3])
-	
-	$DetectionArea/CollisionPolygon2D.polygon = visionCone
-	$DetectionArea/Polygon2D.polygon = visionCone
+	$VisionCone.vision_angle = vision_angle
+	$VisionCone.vision_dist = vision_dist
 	
 	
