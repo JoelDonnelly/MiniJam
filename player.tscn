@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm62kb7bxw418"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_kqst3"]
+[ext_resource type="Texture2D" uid="uid://b2rnbbrkwfknl" path="res://dude_green.png" id="1_sx785"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qcj3g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sx785")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_kqst3")
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qcj3g")
