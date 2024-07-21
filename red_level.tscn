@@ -1,17 +1,91 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnj12afexcuaj"]
+[gd_scene load_steps=12 format=3 uid="uid://biotilgqaqpwl"]
 
-[ext_resource type="PackedScene" uid="uid://5g8hfpx0l2bt" path="res://TileMap/tile_background.tscn" id="1_yijec"]
-[ext_resource type="PackedScene" uid="uid://cjf1ferjhjfac" path="res://TileMap/red_tile_map.tscn" id="2_08dmk"]
+[ext_resource type="Script" path="res://red_level.gd" id="1_cgn5o"]
+[ext_resource type="PackedScene" path="res://TileMap/tile_background.tscn" id="1_yijec"]
+[ext_resource type="PackedScene" path="res://TileMap/red_tile_map.tscn" id="2_08dmk"]
 [ext_resource type="PackedScene" uid="uid://bm62kb7bxw418" path="res://Player/player.tscn" id="3_e6ap0"]
+[ext_resource type="PackedScene" uid="uid://dum1srccqccoe" path="res://Enemy/Enemy_base.tscn" id="4_j4jsd"]
+[ext_resource type="Script" path="res://TestingFollower.gd" id="5_atkuh"]
+[ext_resource type="AudioStream" uid="uid://b2nvnqw2gcet1" path="res://Resources/Audio/mini_game_jam_quiet.ogg" id="7_bpgn4"]
+[ext_resource type="AudioStream" uid="uid://bxgbv4xfn2ffc" path="res://Resources/Audio/mini_game_jam_loud_ADDITIVE.ogg" id="8_7fbph"]
+
+[sub_resource type="Curve2D" id="Curve2D_h677d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 422, 379, 0, 0, 0, 0, 167, 380, 0, 0, 0, 0, 164, 335, 0, 0, 0, 0, 422, 335, 0, 0, 0, 0, 422, 379)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_hcjxa"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 994, 317, 0, 0, 0, 0, 991, 87, 0, 0, 0, 0, 758, 79, 0, 0, 0, 0, 1000, 85, 0, 0, 0, 0, 994, 317)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_mlplf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 947, 532, 0, 0, 0, 0, 973, 532, 0, 0, 0, 0, 973, 556, 0, 0, 0, 0, 946, 555, 0, 0, 0, 0, 947, 532)
+}
+point_count = 5
 
 [node name="RedLevel" type="Node2D"]
+script = ExtResource("1_cgn5o")
 
 [node name="TileBackground" parent="." instance=ExtResource("1_yijec")]
 
 [node name="RedTileMap" parent="." instance=ExtResource("2_08dmk")]
 
-[node name="Player" parent="." instance=ExtResource("3_e6ap0")]
+[node name="Player" parent="." groups=["Target"] instance=ExtResource("3_e6ap0")]
 position = Vector2(162, 76)
 scale = Vector2(0.15, 0.15)
 speed = 200
 dash_modifier = 7.0
+
+[node name="EnemyA" parent="." node_paths=PackedStringArray("patrolPath") instance=ExtResource("4_j4jsd")]
+position = Vector2(423, 367)
+scale = Vector2(1.5, 1.5)
+patrolPath = NodePath("../Path2DA/PathFollow2D")
+
+[node name="Path2DA" type="Path2D" parent="."]
+curve = SubResource("Curve2D_h677d")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2DA"]
+position = Vector2(422, 379)
+rotation = 3.13767
+script = ExtResource("5_atkuh")
+
+[node name="EnemyB" parent="." node_paths=PackedStringArray("patrolPath") instance=ExtResource("4_j4jsd")]
+position = Vector2(997, 329)
+scale = Vector2(1.5, 1.5)
+patrolPath = NodePath("../Path2DB/PathFollow2D")
+
+[node name="Path2DB" type="Path2D" parent="."]
+curve = SubResource("Curve2D_hcjxa")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2DB"]
+position = Vector2(994, 317)
+rotation = -1.58384
+script = ExtResource("5_atkuh")
+
+[node name="EnemyC" parent="." node_paths=PackedStringArray("patrolPath") instance=ExtResource("4_j4jsd")]
+position = Vector2(977, 547)
+scale = Vector2(1.5, 1.5)
+patrolPath = NodePath("../Path2DC/PathFollow2D")
+
+[node name="Path2DC" type="Path2D" parent="."]
+curve = SubResource("Curve2D_mlplf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2DC"]
+position = Vector2(947, 532)
+script = ExtResource("5_atkuh")
+
+[node name="AudioBackground" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_bpgn4")
+volume_db = -3.0
+
+[node name="AudioBattle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_7fbph")
+volume_db = -80.0
+
+[connection signal="startChase" from="EnemyA" to="." method="_on_enemy_start_chase"]
+[connection signal="startChase" from="EnemyB" to="." method="_on_enemy_start_chase"]
+[connection signal="startChase" from="EnemyC" to="." method="_on_enemy_start_chase"]

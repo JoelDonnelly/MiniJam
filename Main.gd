@@ -9,21 +9,11 @@ func _ready():
 	$AudioLiftMusic.play()
 	
 func _on_control_start_game():
+	add_child(preload("res://red_level.tscn").instantiate())
 	$CanvasGroup.visible = false
-	
 	$AudioLiftMusic.stop()
-	$AudioBackground.play()
-	$AudioBattle.volume_db = -80
-	$AudioBattle.play()
 	
-	$AudioBackground
-	
-func _process(delta):
-	if battleMusicActive:
-		$AudioBattle.volume_db = move_toward($AudioBattle.volume_db,-3,80*delta/battleMusicFadeInTime)
-	else:
-		$AudioBattle.volume_db = move_toward($AudioBattle.volume_db,-80,80*delta/battleMusicFadeInTime)
-	
+
 
 
 

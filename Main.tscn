@@ -1,46 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbgew3je5jd7o"]
+[gd_scene load_steps=4 format=3 uid="uid://bbgew3je5jd7o"]
 
-[ext_resource type="PackedScene" uid="uid://dum1srccqccoe" path="res://Enemy/Enemy_base.tscn" id="1_1soms"]
 [ext_resource type="Script" path="res://Main.gd" id="1_u0lco"]
-[ext_resource type="Script" path="res://TestingFollower.gd" id="2_li61r"]
-[ext_resource type="PackedScene" uid="uid://bm62kb7bxw418" path="res://Player/player.tscn" id="5_4s4hj"]
-[ext_resource type="AudioStream" uid="uid://b2nvnqw2gcet1" path="res://Resources/Audio/mini_game_jam_quiet.ogg" id="7_yloly"]
-[ext_resource type="AudioStream" uid="uid://bxgbv4xfn2ffc" path="res://Resources/Audio/mini_game_jam_loud_ADDITIVE.ogg" id="8_bvsju"]
 [ext_resource type="AudioStream" uid="uid://ca1ka23j8jc0t" path="res://Resources/Audio/lift.ogg" id="9_bshlb"]
 [ext_resource type="PackedScene" uid="uid://cukknbi0rqhk0" path="res://startScreen.tscn" id="10_b6h85"]
 
-[sub_resource type="Curve2D" id="Curve2D_617r1"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 529, 0, 0, 0, 0, 0, 925, 275, 0, 0, 0, 0, 376, 161, 0, 0, 0, 0, 832, 524, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, -71, -26, 0, 0, 0, 0, 474, 405, 0, 0, 0, 0, 10, 292, 0, 0, 0, 0, 25, 569, 0, 0, 0, 0, 571, 506, 0, 0, 0, 0, 605, 131, 0, 0, 0, 0, 832, 55, 0, 0, 0, 0, 151, 438, 0, 0, 0, 0, 274, 228, 0, 0, 0, 0, 35, 110, 0, 0, 0, 0, 339, 3, 0, 0, 0, 0, 531, 1, 0, 0, 0, 0, 1000, 548)
-}
-point_count = 18
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_u0lco")
-
-[node name="EnemyBase" parent="." node_paths=PackedStringArray("patrolPath") instance=ExtResource("1_1soms")]
-patrolPath = NodePath("../Path2D/PathFollow2D")
-
-[node name="Path2D" type="Path2D" parent="."]
-position = Vector2(99, 48)
-curve = SubResource("Curve2D_617r1")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(529, 0)
-rotation = 0.606988
-script = ExtResource("2_li61r")
-
-[node name="Player" parent="." groups=["Target"] instance=ExtResource("5_4s4hj")]
-position = Vector2(114, 224)
-scale = Vector2(0.1, 0.1)
-
-[node name="AudioBackground" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_yloly")
-volume_db = -3.0
-
-[node name="AudioBattle" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_bvsju")
-volume_db = -80.0
 
 [node name="AudioLiftMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_bshlb")
@@ -59,5 +24,4 @@ offset_top = 237.0
 offset_right = 313.0
 offset_bottom = 237.0
 
-[connection signal="startChase" from="EnemyBase" to="." method="_on_enemy_base_start_chase"]
 [connection signal="StartGame" from="CanvasGroup/Control" to="." method="_on_control_start_game"]
