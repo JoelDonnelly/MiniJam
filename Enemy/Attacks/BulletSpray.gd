@@ -12,6 +12,7 @@ func spawn_bullet(ang: float) -> Node2D:
 	var b = bullet_scene.instantiate()
 	b.scale = Vector2(0.5,0.5)
 	b.rotation = ang
+	b.position = global_position
 	bullet_parent.add_child(b)
 	return b
 	

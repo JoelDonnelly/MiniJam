@@ -13,7 +13,7 @@ var step_ang : float
 func _ready():
 	start_ang = -total_angle/2
 	step_ang = total_angle/bullets_in_wave
-	attack()
+
 	
 func attack():
 	var ib : int = 0
@@ -29,3 +29,6 @@ func attack():
 		ang = start_ang
 		iw += 1
 		await get_tree().create_timer(wave_delay).timeout
+
+func set_target(t : Node2D):
+	target = t

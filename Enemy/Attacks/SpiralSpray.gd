@@ -11,7 +11,7 @@ var angleInc : float
 
 func _ready():
 	angleInc = 2*PI/(bpr) + offset*2*PI/(bpr**2)
-	attack()
+
 	pass
 	
 func attack():

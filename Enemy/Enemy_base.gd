@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 signal startChase
+signal targetFound(target : Node2D)
+
+signal enemyDead
 
 @export var patrolPath : Node2D
 
@@ -20,11 +23,17 @@ var is_patroling = true
 		
 func _ready():
 	resetVisionShape()
+	$TargetSpray.bullet_parent = get_parent()
+	$WaveSpray.bullet_parent = get_parent()
+	$SpiralSpray.bullet_parent = get_parent()
 	
 func on_chase_initiated(char : Node2D) -> void: # connect these to signal
 	target = char
 	is_chasing = true
 	is_patroling = false
+	$VisionCone.visible = false
+	targetFound.emit(char)
+	$AttackTimer.start()
 	startChase.emit()
 	
 func on_chase_canceled() -> void: # connect these to signal 
@@ -36,8 +45,9 @@ func _physics_process(delta):
 	var speed : float = 0
 	var direction : Vector2 = Vector2.ZERO 
 	if is_chasing && target:
-		direction = position.direction_to(target.position).normalized()
-		speed = chaseSpeed
+		if (target.position - position).length() > 300:
+			direction = position.direction_to(target.position).normalized()
+			speed = chaseSpeed
 	elif is_patroling && patrolPath:
 		direction = position.direction_to(patrolPath.position).normalized()
 		speed = patrolSpeed
@@ -54,5 +64,24 @@ func resetVisionShape() -> void:
 	
 
 func _on_health_component_out_of_health():
+	enemyDead.emit()
+	var deathSpiral = SpiralSpray.new()
+	deathSpiral.bullet_parent = get_parent()
+	deathSpiral.bullet_scene = preload("res://Enemy/Bullet.tscn")
+	get_parent().add_child(deathSpiral)
+	deathSpiral.position = position
+	deathSpiral.attack()
 	queue_free()
+	
+	pass # Replace with function body.
+
+
+func _on_attack_timer_timeout():
+	var selection = randi_range(0,2)
+	if selection == 0:
+		$TargetSpray.attack()
+	if selection == 1:
+		$WaveSpray.attack()
+	if selection == 2:
+		$SpiralSpray.attack()
 	pass # Replace with function body.

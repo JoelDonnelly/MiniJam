@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dum1srccqccoe"]
+[gd_scene load_steps=14 format=3 uid="uid://dum1srccqccoe"]
 
 [ext_resource type="Script" path="res://Enemy/Enemy_base.gd" id="1_4i183"]
 [ext_resource type="Texture2D" uid="uid://c6tvchf5uftta" path="res://Resources/zombie.png" id="2_gjvrb"]
@@ -7,6 +7,10 @@
 [ext_resource type="Script" path="res://health/health.gd" id="5_r5yr1"]
 [ext_resource type="Script" path="res://health/HitBox.gd" id="6_vd6xq"]
 [ext_resource type="PackedScene" uid="uid://dwpr58bwswx3x" path="res://health/health_bar.tscn" id="7_abc1e"]
+[ext_resource type="Script" path="res://Enemy/Attacks/TargetedSpray.gd" id="8_hg7li"]
+[ext_resource type="Script" path="res://Enemy/Attacks/WaveSpray.gd" id="9_6e3i1"]
+[ext_resource type="PackedScene" uid="uid://fpcsenpftkra" path="res://Enemy/Bullet.tscn" id="9_uj1yw"]
+[ext_resource type="Script" path="res://Enemy/Attacks/SpiralSpray.gd" id="10_jw1qh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q4h4i"]
 radius = 16.0
@@ -79,6 +83,29 @@ scale = Vector2(0.5, 0.3)
 health_component = NodePath("../HealthComponent")
 visible_when_full = true
 
+[node name="TargetSpray" type="Node2D" parent="."]
+script = ExtResource("8_hg7li")
+bullets = 20
+delay = 0.02
+bullet_scene = ExtResource("9_uj1yw")
+
+[node name="WaveSpray" type="Node2D" parent="."]
+script = ExtResource("9_6e3i1")
+bullets_in_wave = 7
+waves = 5
+total_angle = 0.349
+bullet_scene = ExtResource("9_uj1yw")
+
+[node name="SpiralSpray" type="Node2D" parent="."]
+script = ExtResource("10_jw1qh")
+bullets = 50
+bullet_scene = ExtResource("9_uj1yw")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="targetFound" from="." to="TargetSpray" method="set_target"]
+[connection signal="targetFound" from="." to="WaveSpray" method="set_target"]
 [connection signal="target_entered_vision" from="VisionCone" to="." method="on_chase_initiated"]
-[connection signal="target_exited_vision" from="VisionCone" to="." method="on_chase_canceled"]
 [connection signal="out_of_health" from="HealthComponent" to="." method="_on_health_component_out_of_health"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

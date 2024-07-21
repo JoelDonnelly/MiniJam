@@ -8,7 +8,6 @@ class_name TargetSpray
 @export var delay : float = 0.01
 
 func _ready():
-	attack()
 	pass
 	
 func attack():
@@ -22,4 +21,5 @@ func attack():
 		b = spawn_bullet(accuracy + get_angle_to(target.position))
 		i += 1
 
-		
+func set_target(t : Node2D):
+	target = t

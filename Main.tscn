@@ -7,13 +7,13 @@
 [ext_resource type="AudioStream" uid="uid://b2nvnqw2gcet1" path="res://Resources/Audio/mini_game_jam_quiet.ogg" id="7_yloly"]
 [ext_resource type="AudioStream" uid="uid://bxgbv4xfn2ffc" path="res://Resources/Audio/mini_game_jam_loud_ADDITIVE.ogg" id="8_bvsju"]
 [ext_resource type="AudioStream" uid="uid://ca1ka23j8jc0t" path="res://Resources/Audio/lift.ogg" id="9_bshlb"]
-[ext_resource type="PackedScene" uid="uid://cainqf6p3eg75" path="res://startScreen.tscn" id="10_b6h85"]
+[ext_resource type="PackedScene" uid="uid://bx4okvhi7qh1e" path="res://startScreen.tscn" id="10_b6h85"]
 
 [sub_resource type="Curve2D" id="Curve2D_617r1"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 529, 0, 0, 0, 0, 0, 530, 349, 0, 0, 0, 0, 2, 343, 0, 0, 0, 0, 249, 193, 0, 0, 0, 0, 0, 1)
+"points": PackedVector2Array(0, 0, 0, 0, 529, 0, 0, 0, 0, 0, 925, 275, 0, 0, 0, 0, 376, 161, 0, 0, 0, 0, 832, 524, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, -71, -26, 0, 0, 0, 0, 474, 405, 0, 0, 0, 0, 10, 292, 0, 0, 0, 0, 25, 569, 0, 0, 0, 0, 571, 506, 0, 0, 0, 0, 605, 131, 0, 0, 0, 0, 832, 55, 0, 0, 0, 0, 151, 438, 0, 0, 0, 0, 274, 228, 0, 0, 0, 0, 35, 110, 0, 0, 0, 0, 339, 3, 0, 0, 0, 0, 531, 1, 0, 0, 0, 0, 1000, 548)
 }
-point_count = 6
+point_count = 18
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_u0lco")
@@ -22,10 +22,12 @@ script = ExtResource("1_u0lco")
 patrolPath = NodePath("../Path2D/PathFollow2D")
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2(50, 21)
+position = Vector2(99, 48)
 curve = SubResource("Curve2D_617r1")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(529, 0)
+rotation = 0.606988
 script = ExtResource("2_li61r")
 
 [node name="Player" parent="." groups=["Target"] instance=ExtResource("5_4s4hj")]
@@ -46,6 +48,7 @@ volume_db = -3.0
 autoplay = true
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
+visible = false
 
 [node name="Polygon2D" type="Polygon2D" parent="CanvasGroup"]
 color = Color(0.490196, 0.67451, 1, 1)
