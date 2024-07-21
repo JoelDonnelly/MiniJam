@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwexd4wy48d7a"]
+
+[ext_resource type="PackedScene" path="res://TileMap/prototype_tile_map.tscn" id="1_4jljv"]
+[ext_resource type="PackedScene" uid="uid://bm62kb7bxw418" path="res://Player/player.tscn" id="2_kf1tw"]
+
+[node name="PrototypeTileBehaviour" type="Node2D"]
+
+[node name="PrototypeTileMap" parent="." instance=ExtResource("1_4jljv")]
+
+[node name="Player" parent="." instance=ExtResource("2_kf1tw")]
+scale = Vector2(0.2, 0.2)
