@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://fpcsenpftkra"]
+[gd_scene load_steps=6 format=3 uid="uid://fpcsenpftkra"]
 
 [ext_resource type="Script" path="res://Enemy/Bullet.gd" id="1_hvmgy"]
 [ext_resource type="Texture2D" uid="uid://dq0dbbosr8tde" path="res://Resources/projectile.png" id="2_opgb5"]
+[ext_resource type="Script" path="res://health/AttackBox.gd" id="3_v138o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uienk"]
+radius = 11.0
+height = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vtvl5"]
 radius = 12.0
-height = 36.0
+height = 35.28
 
 [node name="Bullet" type="CharacterBody2D"]
 script = ExtResource("1_hvmgy")
@@ -18,3 +23,17 @@ texture = ExtResource("2_opgb5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_uienk")
+
+[node name="AttackBox" type="Area2D" parent="."]
+script = ExtResource("3_v138o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vtvl5")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-4.5, 0)
+scale = Vector2(1.45, 1)
+
+[connection signal="hit" from="AttackBox" to="." method="_on_attack_box_hit"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

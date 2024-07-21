@@ -6,15 +6,17 @@ extends CharacterBody2D
 func _physics_process(delta):
 	velocity = Vector2(bullet_speed*delta,0).rotated(rotation)
 	var col : KinematicCollision2D = move_and_collide(velocity)
-	while col:
-		if col.get_collider() is Node2D:
-			var body : Node2D = col.get_collider()
-			if body.has_method("hit"):
-				body.hit(bullet_damage)
-				self.queue_free()
-			else:
-				add_collision_exception_with(col.get_collider())
-		else:
-			add_collision_exception_with(col.get_collider())
-		col = move_and_collide(col.get_remainder())
+	if col:
+		queue_free()
+	
 		
+
+
+func _on_attack_box_hit(HB):
+	queue_free()
+	pass # Replace with function body.
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()
+	pass # Replace with function body.

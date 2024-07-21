@@ -1,17 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbgew3je5jd7o"]
+[gd_scene load_steps=7 format=3 uid="uid://mat51jtetmq2"]
 
 [ext_resource type="PackedScene" uid="uid://dum1srccqccoe" path="res://Enemy/Enemy_base.tscn" id="1_1soms"]
 [ext_resource type="Script" path="res://TestingFollower.gd" id="2_li61r"]
 [ext_resource type="Script" path="res://BulletSpawner.gd" id="3_8ks4u"]
 [ext_resource type="PackedScene" uid="uid://fpcsenpftkra" path="res://Enemy/Bullet.tscn" id="4_1cmcj"]
+[ext_resource type="PackedScene" uid="uid://bm62kb7bxw418" path="res://Player/player.tscn" id="5_4s4hj"]
 
 [sub_resource type="Curve2D" id="Curve2D_617r1"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 529, 0, 0, 0, 0, 0, 530, 349, 0, 0, 0, 0, 2, 343, 0, 0, 0, 0, 249, 193, 0, 0, 0, 0, 0, 1)
 }
 point_count = 6
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_rfqg7"]
 
 [node name="Main" type="Node2D"]
 
@@ -25,15 +24,6 @@ curve = SubResource("Curve2D_617r1")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 script = ExtResource("2_li61r")
 
-[node name="Area2D" type="StaticBody2D" parent="." groups=["Target"]]
-position = Vector2(540, 237)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_rfqg7")
-
-[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-12, -1, 0, -14, 12, 3, 1, 9)
-
 [node name="BulletSpawner" type="Timer" parent="."]
 wait_time = 2.263
 autostart = true
@@ -42,5 +32,9 @@ bullet_scene = ExtResource("4_1cmcj")
 
 [node name="Marker2D" type="Marker2D" parent="BulletSpawner"]
 position = Vector2(49, 185)
+
+[node name="Player" parent="." groups=["Target"] instance=ExtResource("5_4s4hj")]
+position = Vector2(114, 224)
+scale = Vector2(0.1, 0.1)
 
 [connection signal="timeout" from="BulletSpawner" to="BulletSpawner" method="_on_timeout"]

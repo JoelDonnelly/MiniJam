@@ -49,3 +49,7 @@ func resetVisionShape() -> void:
 	$VisionCone.vision_dist = vision_dist
 	
 	
+
+func _on_health_component_out_of_health():
+	queue_free()
+	pass # Replace with function body.

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal playerdied
+
 var speed: int = 250
 var dash_modifier: float = 15
 
@@ -44,3 +46,9 @@ func get_input(delta : float):
 func _physics_process(delta : float):
 	get_input(delta)
 	move_and_slide()
+
+
+func _on_health_component_out_of_health():
+	playerdied.emit()
+	print("player died")
+	pass # Replace with function body.

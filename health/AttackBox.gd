@@ -2,6 +2,8 @@ extends Area2D
 
 class_name AttackBox
 
+signal hit(HB : HitBox)
+
 var attack : Attack
 
 func _init():
@@ -15,3 +17,4 @@ func _ready():
 func _on_area_enter_attack(area : Area2D):
 	if area is HitBox:
 		area.on_hit(attack)
+		hit.emit(area)
