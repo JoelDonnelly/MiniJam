@@ -5,6 +5,8 @@ extends Node2D
 		health_component = val
 		get_perc_from_component()
 		
+@export var visible_when_full : bool = false
+		
 var health_perc : float = 1.0:
 	set(val):
 		health_perc = val
@@ -21,7 +23,7 @@ func get_perc_from_component():
 	
 func change_health_bar():
 	$healthFilled.scale.x = health_perc
-	if health_perc == 1.0:
+	if (health_perc == 1.0) && !visible_when_full:
 		visible = false
 	else:
 		visible = true
