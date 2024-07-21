@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://db3ijvrkwhym"]
+
+[ext_resource type="Texture2D" uid="uid://b7sn5v4l7sry1" path="res://Resources/basic_walls.png" id="1_yvoxv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mwbnn"]
+resource_name = "basic_walls"
+texture = ExtResource("1_yvoxv")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, -32, 32)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, 32, -32, 32)
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_gflea"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_mwbnn")
+
+[node name="PrototypeTileMap" type="TileMap"]
+tile_set = SubResource("TileSet_gflea")
+format = 2
+layer_0/name = "foreground"
+layer_0/tile_data = PackedInt32Array(327683, 1, 0, 262147, 1, 0, 262148, 1, 0, 196612, 1, 0, 196613, 1, 0, 131077, 1, 0, 131078, 1, 0, 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 131084, 1, 0, 131085, 1, 0, 196621, 1, 0, 196622, 1, 0, 262158, 1, 0, 262159, 1, 0, 327695, 1, 0, 65542, 1, 0, 131083, 65537, 0, 196620, 65537, 0, 262157, 65537, 0, 327694, 65537, 0, 131079, 1, 1, 196614, 1, 1, 262149, 1, 1, 327684, 1, 1, 196623, 65537, 1, 131086, 65537, 1, 65549, 65537, 1, 196611, 1, 2, 131076, 1, 2, 65541, 1, 2, 458759, 1, 1, 393227, 1, 0, 458763, 1, 0, 327691, 1, 2)
