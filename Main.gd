@@ -9,6 +9,7 @@ func _ready():
 	$AudioLiftMusic.play()
 	
 func _on_control_start_game():
+	add_child(preload("res://red_level.tscn").instantiate())
 	$CanvasGroup.visible = false
 	
 	$AudioLiftMusic.stop()
