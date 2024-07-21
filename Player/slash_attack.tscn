@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://uqo2odtv4gi"]
+
+[ext_resource type="Script" path="res://Player/SlashAttack.gd" id="1_gljce"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgki7"]
+size = Vector2(10, 44)
+
+[node name="SlashAttack" type="Area2D"]
+scale = Vector2(27.5294, 28.0654)
+collision_layer = 32
+collision_mask = 6
+script = ExtResource("1_gljce")
+damage = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_sgki7")
+
+[node name="Polygon2D0" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-7, -18, 5, -27, -9, -21)
+
+[node name="Polygon2D1" type="Polygon2D" parent="."]
+visible = false
+color = Color(1, 1, 1, 0.654902)
+polygon = PackedVector2Array(-5, -22, 3, -10, 5, 22, -2, 14, 0, -2)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-7, 7, 4, 22, -9, 10)

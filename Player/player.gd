@@ -17,6 +17,9 @@ var dash_modifier: float = 15
 	set(value):
 		$DashCooldownTimer.wait_time = value
 
+@export var slash_attack : PackedScene
+
+var attack_flip = false
 
 func _ready():
 	pass
@@ -37,6 +40,20 @@ func get_input(delta : float):
 	if Input.is_action_just_pressed("ability_dash") and $DashCooldownTimer.is_stopped():
 		$DashDurationTimer.start()
 		$DashCooldownTimer.start()
+	
+	if Input.is_action_just_pressed("ability_attack"):
+		var slash_node : AttackBox = slash_attack.instantiate()
+		var dir = global_position.direction_to(get_global_mouse_position())
+		if attack_flip:
+			slash_node.scale.y = slash_node.scale.y * -1
+			attack_flip = false
+		else:
+			attack_flip = true
+		slash_node.position = dir * 400
+		slash_node.rotation = dir.angle()
+		add_child(slash_node)
+
+		slash_node._on_activate_attack()
 	
 	velocity = velocity.normalized() * speed
 	if not $DashDurationTimer.is_stopped():
