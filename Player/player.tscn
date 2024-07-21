@@ -127,8 +127,7 @@ shape = SubResource("CapsuleShape2D_x3eff")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qcj3g")
-animation = &"IdleFront"
-frame_progress = 0.927069
+animation = &"IdleBack"
 
 [node name="DashCooldownTimer" type="Timer" parent="."]
 wait_time = 0.5

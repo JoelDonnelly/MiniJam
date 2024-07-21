@@ -68,6 +68,20 @@ func _physics_process(delta : float):
 		get_input(delta)
 	move_and_slide()
 
+func _process(delta : float):
+	if velocity.length() == 0:
+		$AnimatedSprite2D.play("IdleFront")
+	else:
+		print(velocity.angle())
+		if (velocity.angle() > -PI/3) && (velocity.angle() < PI/3):
+			$AnimatedSprite2D.play("walkRight")
+		elif (velocity.angle() > PI/3) && (velocity.angle() < 2*PI/3):
+			$AnimatedSprite2D.play("walkDown")
+		elif (velocity.angle() < -PI/3) && (velocity.angle() > -2*PI/3):
+			$AnimatedSprite2D.play("walkUp")
+		else:
+			$AnimatedSprite2D.play("walkLeft")
+		
 
 func _on_health_component_out_of_health():
 	playerdied.emit()
@@ -76,3 +90,4 @@ func _on_health_component_out_of_health():
 
 func _on_dash_duration_timer_timeout():
 	$HealthComponent.disable_I()
+	
