@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://b2nvnqw2gcet1" path="res://Resources/Audio/mini_game_jam_quiet.ogg" id="7_yloly"]
 [ext_resource type="AudioStream" uid="uid://bxgbv4xfn2ffc" path="res://Resources/Audio/mini_game_jam_loud_ADDITIVE.ogg" id="8_bvsju"]
 [ext_resource type="AudioStream" uid="uid://ca1ka23j8jc0t" path="res://Resources/Audio/lift.ogg" id="9_bshlb"]
-[ext_resource type="PackedScene" uid="uid://bx4okvhi7qh1e" path="res://startScreen.tscn" id="10_b6h85"]
+[ext_resource type="PackedScene" uid="uid://cukknbi0rqhk0" path="res://startScreen.tscn" id="10_b6h85"]
 
 [sub_resource type="Curve2D" id="Curve2D_617r1"]
 _data = {
@@ -20,6 +20,8 @@ script = ExtResource("1_u0lco")
 
 [node name="EnemyBase" parent="." node_paths=PackedStringArray("patrolPath") instance=ExtResource("1_1soms")]
 patrolPath = NodePath("../Path2D/PathFollow2D")
+chaseSpeed = 200.0
+patrolSpeed = 100.0
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(99, 48)

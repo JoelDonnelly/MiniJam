@@ -57,8 +57,15 @@ func _physics_process(delta):
 	velocity = direction * speed
 	move_and_slide()
 	
-func _process(_delta):
-	
+func _process(delta : float):
+	if velocity.length() == 0:
+		$AnimatedSprite2D.play("Idle")
+	else:
+		if ((velocity.angle() < -PI/3) && (velocity.angle() > -2*PI/3)):
+			$AnimatedSprite2D.play("WalkUp")
+		else:
+			$AnimatedSprite2D.play("WalkDown")
+			
 	
 func resetVisionShape() -> void:
 	$VisionCone.vision_angle = vision_angle

@@ -61,8 +61,6 @@ animations = [{
 collision_layer = 2
 collision_mask = 67
 script = ExtResource("1_4i183")
-chaseSpeed = null
-patrolSpeed = null
 vision_angle = 1.047
 vision_dist = 200.0
 
@@ -74,8 +72,7 @@ shape = SubResource("CapsuleShape2D_q4h4i")
 position = Vector2(-3.8147e-06, -10)
 scale = Vector2(0.0665, 0.0940153)
 sprite_frames = SubResource("SpriteFrames_o3x5k")
-animation = &"WalkUp"
-frame_progress = 0.340892
+animation = &"Idle"
 
 [node name="VisionCone" parent="." instance=ExtResource("4_237ct")]
 vision_dist = 200.0
