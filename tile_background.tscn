@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://5g8hfpx0l2bt"]
+
+[ext_resource type="Texture2D" uid="uid://cwfy84lv88xol" path="res://Resources/floor.png" id="1_yw5ie"]
+
+[node name="TileBackground" type="Sprite2D"]
+position = Vector2(613, 328)
+texture = ExtResource("1_yw5ie")
