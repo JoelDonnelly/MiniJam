@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var speed: int = 250
-var dash_modifier: float = 15
+@export var speed: int = 250
+@export var dash_modifier: float = 15
 
 @export var dash_duration: float:
 	get:
@@ -15,9 +15,13 @@ var dash_modifier: float = 15
 	set(value):
 		$DashCooldownTimer.wait_time = value
 
+var is_dashing: bool:
+	get:
+		return not $DashDurationTimer.is_stopped()
 
-func _ready():
-	pass
+var can_dash: bool:
+	get:
+		return $DashCooldownTimer.is_stopped()
 
 
 func get_input(delta : float):
@@ -31,16 +35,16 @@ func get_input(delta : float):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+		
+	velocity = velocity.normalized() * speed
 	
-	if Input.is_action_just_pressed("ability_dash") and $DashCooldownTimer.is_stopped():
+	if Input.is_action_just_pressed("ability_dash") and can_dash:
 		$DashDurationTimer.start()
 		$DashCooldownTimer.start()
-	
-	velocity = velocity.normalized() * speed
-	if not $DashDurationTimer.is_stopped():
 		velocity *= dash_modifier
 
 
 func _physics_process(delta : float):
-	get_input(delta)
+	if not is_dashing:
+		get_input(delta)
 	move_and_slide()
