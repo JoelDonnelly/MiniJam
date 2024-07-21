@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://db3ijvrkwhym"]
+[gd_scene load_steps=5 format=3 uid="uid://db3ijvrkwhym"]
 
 [ext_resource type="Texture2D" uid="uid://b7sn5v4l7sry1" path="res://Resources/basic_walls.png" id="1_yvoxv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n16do"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mwbnn"]
 resource_name = "basic_walls"
@@ -29,7 +31,9 @@ texture_region_size = Vector2i(64, 64)
 
 [sub_resource type="TileSet" id="TileSet_gflea"]
 tile_size = Vector2i(64, 64)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 64
+physics_layer_0/collision_mask = 3
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_n16do")
 sources/1 = SubResource("TileSetAtlasSource_mwbnn")
 
 [node name="PrototypeTileMap" type="TileMap"]
