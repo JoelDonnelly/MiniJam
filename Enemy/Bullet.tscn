@@ -14,7 +14,7 @@ height = 35.28
 
 [node name="Bullet" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 67
+collision_mask = 65
 script = ExtResource("1_hvmgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
