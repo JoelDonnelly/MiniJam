@@ -80,8 +80,8 @@ vision_angle = 0.785
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("5_r5yr1")
-max_health = 10.0
-health = 10.0
+max_health = 40.0
+health = 40.0
 
 [node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("hp")]
 collision_layer = 6

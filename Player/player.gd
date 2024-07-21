@@ -72,7 +72,6 @@ func _process(delta : float):
 	if velocity.length() == 0:
 		$AnimatedSprite2D.play("IdleFront")
 	else:
-		print(velocity.angle())
 		if (velocity.angle() > -PI/3) && (velocity.angle() < PI/3):
 			$AnimatedSprite2D.play("walkRight")
 		elif (velocity.angle() > PI/3) && (velocity.angle() < 2*PI/3):

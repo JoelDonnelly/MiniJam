@@ -20,8 +20,6 @@ script = ExtResource("1_u0lco")
 
 [node name="EnemyBase" parent="." node_paths=PackedStringArray("patrolPath") instance=ExtResource("1_1soms")]
 patrolPath = NodePath("../Path2D/PathFollow2D")
-chaseSpeed = 200.0
-patrolSpeed = 100.0
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(99, 48)
@@ -50,7 +48,6 @@ volume_db = -3.0
 autoplay = true
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
-visible = false
 
 [node name="Polygon2D" type="Polygon2D" parent="CanvasGroup"]
 color = Color(0.490196, 0.67451, 1, 1)

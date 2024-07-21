@@ -16,6 +16,8 @@ func _on_control_start_game():
 	$AudioBattle.volume_db = -80
 	$AudioBattle.play()
 	
+	$AudioBackground
+	
 func _process(delta):
 	if battleMusicActive:
 		$AudioBattle.volume_db = move_toward($AudioBattle.volume_db,-3,80*delta/battleMusicFadeInTime)
