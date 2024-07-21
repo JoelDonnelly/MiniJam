@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://db3ijvrkwhym"]
 
-[ext_resource type="Texture2D" path="res://Resources/basic_walls.png" id="1_yvoxv"]
+[ext_resource type="Texture2D" uid="uid://b7sn5v4l7sry1" path="res://Resources/basic_walls.png" id="1_yvoxv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n16do"]
 
