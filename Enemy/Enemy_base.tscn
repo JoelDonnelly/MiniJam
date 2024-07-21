@@ -1,3 +1,62 @@
-[gd_scene format=3 uid="uid://dum1srccqccoe"]
+[gd_scene load_steps=6 format=3 uid="uid://dum1srccqccoe"]
 
-[node name="EnemyBase" type="Node2D"]
+[ext_resource type="Script" path="res://Enemy/Enemy_base.gd" id="1_4i183"]
+[ext_resource type="Texture2D" uid="uid://c6tvchf5uftta" path="res://Resources/zombie.png" id="2_gjvrb"]
+[ext_resource type="Texture2D" uid="uid://c4mdfpwt25fj8" path="res://Resources/dude_green.png" id="3_cxkac"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q4h4i"]
+radius = 16.0
+height = 58.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o3x5k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gjvrb")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gjvrb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cxkac")
+}, {
+"duration": 2.0,
+"texture": ExtResource("2_gjvrb")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 10.0
+}]
+
+[node name="EnemyBase" type="CharacterBody2D"]
+script = ExtResource("1_4i183")
+vision_angle = 1.047
+vision_dist = 200.0
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -9)
+shape = SubResource("CapsuleShape2D_q4h4i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3.8147e-06, -10)
+scale = Vector2(0.0665, 0.0940153)
+sprite_frames = SubResource("SpriteFrames_o3x5k")
+animation = &"Running"
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-1, -9)
+shape = SubResource("CapsuleShape2D_q4h4i")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectionArea"]
+
+[node name="Polygon2D" type="Polygon2D" parent="DetectionArea"]
+color = Color(0.866667, 0.333333, 0.290196, 0.411765)
