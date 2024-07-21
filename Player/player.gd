@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
+signal playerdied
+
 @export var speed: int = 250
 @export var dash_modifier: float = 15
-
-signal playerdied
+@export var slash_attack : PackedScene
 
 @export var dash_duration: float:
 	get:
@@ -17,12 +18,9 @@ signal playerdied
 	set(value):
 		$DashCooldownTimer.wait_time = value
 
-
 var is_dashing: bool:
 	get:
 		return not $DashDurationTimer.is_stopped()
-
-@export var slash_attack : PackedScene
 
 var attack_flip = false
 
@@ -42,13 +40,13 @@ func get_input(delta : float):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-		
+	
 	velocity = velocity.normalized() * speed
 	
 	if Input.is_action_just_pressed("ability_dash") and can_dash:
 		$DashDurationTimer.start()
 		$DashCooldownTimer.start()
-
+		velocity *= dash_modifier
 
 	if Input.is_action_just_pressed("ability_attack"):
 		var slash_node : AttackBox = slash_attack.instantiate()
@@ -61,12 +59,7 @@ func get_input(delta : float):
 		slash_node.position = dir * 400
 		slash_node.rotation = dir.angle()
 		add_child(slash_node)
-
 		slash_node._on_activate_attack()
-	
-	velocity = velocity.normalized() * speed
-	if not $DashDurationTimer.is_stopped():
-		velocity *= dash_modifier
 
 
 func _physics_process(delta : float):
