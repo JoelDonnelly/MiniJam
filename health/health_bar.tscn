@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwpr58bwswx3x"]
+
+[ext_resource type="Script" path="res://health/HealthBar.gd" id="1_aecpi"]
+
+[node name="HealthBar" type="CanvasGroup"]
+script = ExtResource("1_aecpi")
+
+[node name="outline" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 100, 0, 100, 30, 0, 30)
+closed = true
+width = 4.0
+default_color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+
+[node name="healthFilled" type="Polygon2D" parent="."]
+color = Color(0.611765, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, 100, 0, 100, 30, 0, 30)

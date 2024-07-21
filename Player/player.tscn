@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bm62kb7bxw418"]
+[gd_scene load_steps=10 format=3 uid="uid://bm62kb7bxw418"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_kqst3"]
 [ext_resource type="Texture2D" uid="uid://b37uytcd68f88" path="res://Resources/dude_green.png" id="1_sx785"]
+[ext_resource type="PackedScene" uid="uid://uqo2odtv4gi" path="res://Player/slash_attack.tscn" id="2_2igxq"]
+[ext_resource type="Script" path="res://health/health.gd" id="3_wvlhs"]
+[ext_resource type="Script" path="res://health/HitBox.gd" id="4_0ua7n"]
+[ext_resource type="PackedScene" uid="uid://dwpr58bwswx3x" path="res://health/health_bar.tscn" id="5_i6a26"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x3eff"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qcj3g"]
 animations = [{
@@ -14,12 +20,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xa6ha"]
+radius = 232.0
+height = 568.0
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_kqst3")
+slash_attack = ExtResource("2_2igxq")
 metadata/_edit_group_ = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_x3eff")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qcj3g")
@@ -31,3 +43,21 @@ one_shot = true
 [node name="DashDurationTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_wvlhs")
+
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("hp")]
+script = ExtResource("4_0ua7n")
+hp = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CapsuleShape2D_xa6ha")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_i6a26")]
+position = Vector2(-172, -364)
+scale = Vector2(3.38204, 2.05102)
+health_component = NodePath("../HealthComponent")
+visible_when_full = true
+
+[connection signal="out_of_health" from="HealthComponent" to="." method="_on_health_component_out_of_health"]
