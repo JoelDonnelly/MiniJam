@@ -47,6 +47,7 @@ func get_input(delta : float):
 		$DashDurationTimer.start()
 		$DashCooldownTimer.start()
 		velocity *= dash_modifier
+		$HealthComponent.enable_I()
 
 	if Input.is_action_just_pressed("ability_attack"):
 		var slash_node : AttackBox = slash_attack.instantiate()
@@ -71,4 +72,7 @@ func _physics_process(delta : float):
 func _on_health_component_out_of_health():
 	playerdied.emit()
 	print("player died")
-	pass # Replace with function body.
+
+
+func _on_dash_duration_timer_timeout():
+	$HealthComponent.disable_I()

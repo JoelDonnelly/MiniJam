@@ -63,4 +63,5 @@ scale = Vector2(3.38204, 2.05102)
 health_component = NodePath("../HealthComponent")
 visible_when_full = true
 
+[connection signal="timeout" from="DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]
 [connection signal="out_of_health" from="HealthComponent" to="." method="_on_health_component_out_of_health"]
