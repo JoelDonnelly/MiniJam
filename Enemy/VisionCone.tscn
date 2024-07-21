@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dorcn15e7ssm6"]
+
+[ext_resource type="Script" path="res://Enemy/VisionCone.gd" id="1_r0ou8"]
+
+[node name="VisionCone" type="Area2D"]
+script = ExtResource("1_r0ou8")
+target_group = &"Target"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.866667, 0.333333, 0.290196, 0.411765)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
