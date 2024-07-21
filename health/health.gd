@@ -6,6 +6,8 @@ signal healed(ammount : float)
 signal damaged(ammount : float)
 signal fully_healed
 
+var I_enabled = false
+
 @export var max_health : float = 100
 
 @export var health : float = 100:
@@ -23,6 +25,8 @@ func recieve_damage(damage : float, allow_over_flow : bool = false) -> void:
 	var damage_applied = damage
 	if allow_over_flow == false:
 		damage_applied = min(damage, health)
+	if I_enabled:
+		damage_applied = 0
 	health -= damage_applied
 	damaged.emit(damage_applied)
 
@@ -39,7 +43,18 @@ func set_health(value : float) -> void:
 	elif value < health:
 		damaged.emit(health-value)
 	health = value
+
+func enable_I():
+	I_enabled = true
 	
+func disable_I():
+	I_enabled = false
+	
+func timed_enable_I(duration : float):
+	enable_I()
+	await get_tree().create_timer(duration).timeout
+	disable_I()
+
 func reset_health() -> void:
 	set_health(max_health)
 

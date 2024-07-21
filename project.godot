@@ -65,3 +65,4 @@ ability_attack={
 2d_physics/layer_4="PlayerHitBox"
 2d_physics/layer_5="EnemyAttackBox"
 2d_physics/layer_6="PlayerAttackBox"
+2d_physics/layer_7="Environment"

@@ -26,6 +26,7 @@ height = 568.0
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.25, 0.25)
+collision_mask = 66
 script = ExtResource("1_kqst3")
 slash_attack = ExtResource("2_2igxq")
 metadata/_edit_group_ = true
@@ -48,6 +49,8 @@ one_shot = true
 script = ExtResource("3_wvlhs")
 
 [node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("hp")]
+collision_layer = 9
+collision_mask = 16
 script = ExtResource("4_0ua7n")
 hp = NodePath("../HealthComponent")
 
