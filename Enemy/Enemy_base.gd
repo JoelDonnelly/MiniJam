@@ -57,6 +57,9 @@ func _physics_process(delta):
 	velocity = direction * speed
 	move_and_slide()
 	
+func _process(_delta):
+	
+	
 func resetVisionShape() -> void:
 	$VisionCone.vision_angle = vision_angle
 	$VisionCone.vision_dist = vision_dist
