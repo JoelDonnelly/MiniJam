@@ -66,3 +66,7 @@ ability_attack={
 2d_physics/layer_5="EnemyAttackBox"
 2d_physics/layer_6="PlayerAttackBox"
 2d_physics/layer_7="Environment"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.804743, 0.804743, 0.804743, 1)
